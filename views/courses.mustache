@@ -1,0 +1,25 @@
+<!-- views/courses.mustache -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Courses</title>
+</head>
+<body>
+  <h1>Available Courses</h1>
+  {{#courses}}
+    <div style="margin-bottom: 20px;">
+      <h2>{{name}}</h2>
+      <p><strong>Duration:</strong> {{duration}}</p>
+      <p><strong>Description:</strong> {{description}}</p>
+      <p><strong>Location:</strong> {{location}}</p>
+      <p><strong>Price:</strong> {{price}}</p>
+      <p><strong>Schedule:</strong></p>
+      <ul>
+        {{#schedule}}
+          <li>{{date}} at {{time}}</li>
+        {{/schedule}}
+      </ul>
+    </div>
+  {{/courses}}
+</body>
+</html>

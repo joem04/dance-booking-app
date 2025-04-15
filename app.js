@@ -4,6 +4,10 @@ const path = require('path');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 
+// Routes
+const publicRoutes = require('./routes/public');
+
+
 const app = express();
 const PORT = 3000;
 
@@ -27,6 +31,11 @@ app.use(session({
 app.get('/', (req, res) => {
   res.render('index', { title: 'Dance Booking App' });
 });
+
+
+// Public routes
+app.use('/', publicRoutes);
+
 
 // Start server
 app.listen(PORT, () => {
