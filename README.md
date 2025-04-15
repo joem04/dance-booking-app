@@ -32,7 +32,7 @@ A Node.js and Express-based web application for managing dance class bookings, t
 
 ## 🖥️ Live Access
 
-A live demo version of the sit can be access [here](https://dance-booking-app-d9e4.onrender.com)
+A live demo version of the sit can be accessed [here](https://dance-booking-app-d9e4.onrender.com)
 
 Note: If the site has been inactive, it automatically stops running. This may cause some delay when trying to access it.
 
