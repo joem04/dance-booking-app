@@ -10,4 +10,17 @@ router.get('/courses', (req, res) => {
   });
 });
 
+router.get('/courses/:id', (req, res) => {
+  const courseId = req.params.id;
+
+  coursesDB.findOne({ _id: courseId }, (err, course) => {
+    if (err || !course) {
+      return res.status(404).send('Course not found');
+    }
+
+    res.render('course-detail', { course });
+  });
+});
+
+
 module.exports = router;

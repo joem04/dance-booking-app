@@ -1,0 +1,27 @@
+<!-- views/course-detail.mustache -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{course.name}}</title>
+</head>
+<body>
+  <h1>{{course.name}}</h1>
+  <p><strong>Duration:</strong> {{course.duration}}</p>
+  <p><strong>Description:</strong> {{course.description}}</p>
+  <p><strong>Location:</strong> {{course.location}}</p>
+  <p><strong>Price:</strong> {{course.price}}</p>
+
+  <h3>Schedule:</h3>
+  <ul>
+    {{#course.schedule}}
+      <li>{{date}} at {{time}}</li>
+    {{/course.schedule}}
+  </ul>
+
+  <form action="#" method="post">
+    <button type="submit">Enroll (coming soon)</button>
+  </form>
+
+  <p><a href="/courses">← Back to courses</a></p>
+</body>
+</html>
