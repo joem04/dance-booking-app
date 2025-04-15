@@ -2,6 +2,8 @@
 
 A Node.js and Express-based web application for managing dance class bookings, tailored for both organisers and participants.
 
+Please note that admin login credentials have been included in the submission for the coursework on GCU Learn.
+
 ## 🚀 Features
 
 - **User Registration & Authentication**: Secure sign-up and login functionalities.
