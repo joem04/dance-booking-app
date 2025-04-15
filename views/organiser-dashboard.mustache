@@ -1,0 +1,17 @@
+<h1>Organiser Dashboard</h1>
+
+<a href="/organiser/courses/new">Add New Course</a>
+
+<h2>All Courses</h2>
+<ul>
+  {{#courses}}
+    <li>
+      <strong>{{name}}</strong> – {{duration}} – £{{price}} <br>
+      <form action="/organiser/courses/{{_id}}/delete" method="POST" style="display:inline;">
+        <button type="submit">Delete</button>
+      </form>
+    </li>
+  {{/courses}}
+</ul>
+
+<a href="/courses">← Back to Courses</a>

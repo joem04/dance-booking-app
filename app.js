@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 // Routes
 const publicRoutes = require('./routes/public');
 const authRoutes = require('./routes/auth');
+const organiserRoutes = require('./routes/organiser');
 
 
 
@@ -41,6 +42,10 @@ app.use('/', publicRoutes);
 
 // Authentication routes
 app.use('/', authRoutes);
+
+
+// Organiser routes
+app.use('/', organiserRoutes);
 
 
 // Start server

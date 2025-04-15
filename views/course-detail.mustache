@@ -18,9 +18,21 @@
     {{/course.schedule}}
   </ul>
 
-  <form action="#" method="post">
-    <button type="submit">Enroll (coming soon)</button>
-  </form>
+  {{#user}}
+  {{#isEnrolled}}
+    <p><strong>You are already enrolled in this course.</strong></p>
+  {{/isEnrolled}}
+  {{^isEnrolled}}
+    <form action="/courses/{{course._id}}/enroll" method="POST">
+      <button type="submit">Enroll in this course</button>
+    </form>
+  {{/isEnrolled}}
+{{/user}}
+
+{{^user}}
+  <p><a href="/login">Login to enroll</a></p>
+{{/user}}
+
 
   <p><a href="/courses">← Back to courses</a></p>
 </body>
