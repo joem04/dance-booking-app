@@ -35,10 +35,22 @@ router.get('/organiser/courses/new', ensureOrganiser, (req, res) => {
 // Handle new course POST
 router.post('/organiser/courses/new', ensureOrganiser, (req, res) => {
   const { name, duration, description, location, price } = req.body;
-  const schedule = []; // For now, we'll keep it empty
-  const bookings = [];
+  let schedule = [];
 
+if (req.body.date && req.body.time) {
+  const dates = Array.isArray(req.body.date) ? req.body.date : [req.body.date];
+  const times = Array.isArray(req.body.time) ? req.body.time : [req.body.time];
+
+  for (let i = 0; i < dates.length; i++) {
+    if (dates[i] && times[i]) {
+      schedule.push({ date: dates[i], time: times[i] });
+    }
+  }
+}
+
+  const bookings = [];
   const newCourse = { name, duration, description, location, price, schedule, bookings };
+
   coursesDB.insert(newCourse, () => res.redirect('/organiser/dashboard'));
 });
 
@@ -57,20 +69,52 @@ router.get('/organiser/courses/:id/edit', ensureOrganiser, (req, res) => {
       title: 'Edit Course',
       user: req.session.user,
       isOrganiser: true,
-      course
+      course: {
+        ...course,
+        scheduleJSON: JSON.stringify(course.schedule || [])
+      }
     });
   });
 });
 
-// Handle edit
+// Handle edit with improved schedule parsing and safe update
 router.post('/organiser/courses/:id/edit', ensureOrganiser, (req, res) => {
   const { name, duration, description, location, price } = req.body;
 
+  console.log("DEBUG BODY:", req.body);
+
+  let schedule = [];
+
+  if (req.body.date && req.body.time) {
+    const dates = Array.isArray(req.body.date) ? req.body.date : [req.body.date];
+    const times = Array.isArray(req.body.time) ? req.body.time : [req.body.time];
+
+    for (let i = 0; i < dates.length; i++) {
+      if (dates[i] && times[i]) {
+        schedule.push({ date: dates[i], time: times[i] });
+      }
+    }
+  }
+
+  console.log("Parsed Schedule:", schedule);
+
   coursesDB.update(
     { _id: req.params.id },
-    { $set: { name, duration, description, location, price } },
-    {},
-    () => res.redirect('/organiser/dashboard')
+    { $set: { name, duration, description, location, price, schedule } },
+    { multi: false, upsert: false },
+    (err, numReplaced) => {
+      if (err) {
+        console.error("Update error:", err);
+      } else {
+        console.log("Updated documents:", numReplaced);
+      }
+
+      coursesDB.find({}, (err, all) => {
+        console.log("Current DB:", all);
+      });
+
+      res.redirect('/organiser/dashboard');
+    }
   );
 });
 

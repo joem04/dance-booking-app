@@ -2,37 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{title}}</title>
+  <title>Edit Course</title>
   <link rel="stylesheet" href="/css/style.css">
+  <script>
+    function addSessionRow(date = '', time = '') {
+      const container = document.getElementById('schedule-container');
+      const div = document.createElement('div');
+      div.classList.add('session-row');
+      div.innerHTML = `
+        <input type="date" name="date" value="\${date}" required>
+        <input type="time" name="time" value="\${time}" required>
+        <button type="button" onclick="this.parentNode.remove()">Remove</button>
+      `;
+      container.appendChild(div);
+    }
+
+    window.onload = () => {
+      document.getElementById('add-session-btn').addEventListener('click', () => {
+        addSessionRow();
+      });
+
+      const preloaded = JSON.parse(document.getElementById('existing-schedule-json').textContent);
+      preloaded.forEach(entry => {
+        addSessionRow(entry.date, entry.time);
+      });
+    };
+  </script>
 </head>
 <body>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/courses">Courses</a>
-    {{#user}}
-      {{#isOrganiser}}<a href="/organiser/dashboard">Organiser Panel</a>{{/isOrganiser}}
-      <span>Welcome, {{user.username}}</span>
-      <a href="/logout">Logout</a>
-    {{/user}}
-    {{^user}}
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-    {{/user}}
-  </nav>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/courses">Courses</a>
+      {{#user}}
+        {{#isOrganiser}}<a href="/organiser/dashboard">Organiser Panel</a>{{/isOrganiser}}
+        <span class="welcome">Welcome, {{user.username}}</span>
+        <a href="/logout">Logout</a>
+      {{/user}}
+      {{^user}}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      {{/user}}
+    </nav>
+  </header>
 
   <main>
-<h1>Edit Course</h1>
-<form action="/organiser/courses/{{course._id}}/edit" method="POST">
-  <input name="name" value="{{course.name}}" placeholder="Name" required><br>
-  <input name="duration" value="{{course.duration}}" placeholder="Duration" required><br>
-  <input name="description" value="{{course.description}}" placeholder="Description" required><br>
-  <input name="location" value="{{course.location}}" placeholder="Location" required><br>
-  <input name="price" value="{{course.price}}" placeholder="Price" required><br>
-  <button type="submit">Save Changes</button>
-</form>
+    <h1>Edit Course</h1>
+    <form action="/organiser/courses/{{course._id}}/edit" method="POST">
+      <input name="name" value="{{course.name}}" placeholder="Name" required><br>
+      <input name="duration" value="{{course.duration}}" placeholder="Duration" required><br>
+      <textarea name="description" placeholder="Description" required>{{course.description}}</textarea><br>
+      <input name="location" value="{{course.location}}" placeholder="Location" required><br>
+      <input name="price" value="{{course.price}}" placeholder="Price" required><br>
 
-<p><a href="/organiser/dashboard">← Back to Dashboard</a></p>
+      <h2>Schedule</h2>
+      <div id="schedule-container"></div>
+      <button type="button" id="add-session-btn">Add Session</button><br><br>
 
+      <button type="submit">Save Changes</button>
+    </form>
+    <p><a href="/organiser/dashboard">← Back to Dashboard</a></p>
+
+    <script type="application/json" id="existing-schedule-json">
+      {{&course.scheduleJSON}}
+    </script>
   </main>
 </body>
 </html>

@@ -1,2 +1,3 @@
 {"username":"admin","password":"$2b$10$zaD/V.Y6TZSYcbgIlQCPuOLFekJCrneeawpy1lb8RQnGO9Hh8zNXq","role":"organiser","_id":"RCheLaTBJSuRkCMk"}
 {"username":"joe","password":"$2b$10$saTJV01V6cR6.Y9OsZXxW.L6y5YS2k9xQiiMeJcnDQlxpFqvGn/K.","role":"user","_id":"doNWwcekHhTQhwql"}
+{"username":"test","password":"$2b$10$yU4YBEkJQU3jKFM63cYqqO1zNaOTIYBlCL9BH9V4uURS3GmpAvIhe","role":"user","_id":"sTlxIHgxwipb8nbb"}
