@@ -1,4 +1,3 @@
-// routes/public.js
 const express = require('express');
 const router = express.Router();
 const coursesDB = require('../models/courses');
@@ -8,8 +7,10 @@ router.get('/courses', (req, res) => {
   coursesDB.find({}, (err, courses) => {
     if (err) return res.status(500).send('Database error');
     res.render('courses', {
+      title: 'Courses',
       courses,
-      user: req.session.user
+      user: req.session.user,
+      isOrganiser: req.session.user?.role === 'organiser'
     });
   });
 });
@@ -25,9 +26,11 @@ router.get('/courses/:id', (req, res) => {
     const isEnrolled = currentUser && course.bookings && course.bookings.includes(currentUser.username);
 
     res.render('course-detail', {
+      title: course.name,
       course,
       user: currentUser,
-      isEnrolled
+      isEnrolled,
+      isOrganiser: currentUser?.role === 'organiser'
     });
   });
 });

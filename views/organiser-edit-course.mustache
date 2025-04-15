@@ -1,3 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/courses">Courses</a>
+    {{#user}}
+      {{#isOrganiser}}<a href="/organiser/dashboard">Organiser Panel</a>{{/isOrganiser}}
+      <span>Welcome, {{user.username}}</span>
+      <a href="/logout">Logout</a>
+    {{/user}}
+    {{^user}}
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    {{/user}}
+  </nav>
+
+  <main>
 <h1>Edit Course</h1>
 <form action="/organiser/courses/{{course._id}}/edit" method="POST">
   <input name="name" value="{{course.name}}" placeholder="Name" required><br>
@@ -9,3 +32,7 @@
 </form>
 
 <p><a href="/organiser/dashboard">← Back to Dashboard</a></p>
+
+  </main>
+</body>
+</html>

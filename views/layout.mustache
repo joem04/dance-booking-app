@@ -1,3 +1,4 @@
+<!-- views/layout.mustache -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +7,13 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+  <header>
   <nav>
     <a href="/">Home</a>
     <a href="/courses">Courses</a>
     {{#user}}
       {{#isOrganiser}}<a href="/organiser/dashboard">Organiser Panel</a>{{/isOrganiser}}
-      <span>Welcome, {{user.username}}</span>
+      <span class="welcome">Welcome, {{user.username}}</span>
       <a href="/logout">Logout</a>
     {{/user}}
     {{^user}}
@@ -19,20 +21,11 @@
       <a href="/register">Register</a>
     {{/user}}
   </nav>
+</header>
+
 
   <main>
-<!-- views/index.mustache -->
-<!DOCTYPE html>
-<html>
-<head>
-  <title>{{title}}</title>
-</head>
-<body>
-  <h1>{{title}}</h1>
-  <p>Welcome to our dance class booking site! ✨</p>
-</body>
-</html>
-
+    {{{body}}}
   </main>
 </body>
 </html>

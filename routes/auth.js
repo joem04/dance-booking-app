@@ -1,10 +1,13 @@
-// routes/auth.js
 const express = require('express');
 const router = express.Router();
 const { db, createUser, authenticate } = require('../models/users');
 
 router.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register', {
+    title: 'Register',
+    user: req.session.user,
+    isOrganiser: req.session.user?.role === 'organiser'
+  });
 });
 
 router.post('/register', (req, res) => {
@@ -17,7 +20,11 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', {
+    title: 'Login',
+    user: req.session.user,
+    isOrganiser: req.session.user?.role === 'organiser'
+  });
 });
 
 router.post('/login', (req, res) => {

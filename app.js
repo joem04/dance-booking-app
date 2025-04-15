@@ -8,9 +8,6 @@ const bodyParser = require('body-parser');
 const publicRoutes = require('./routes/public');
 const authRoutes = require('./routes/auth');
 const organiserRoutes = require('./routes/organiser');
-
-
-
 const app = express();
 const PORT = 3000;
 
@@ -30,10 +27,14 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// Home route
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Dance Booking App' });
+  res.render('index', {
+    title: 'Dance Booking App',
+    user: req.session.user,
+    isOrganiser: req.session.user?.role === 'organiser'
+  });
 });
+
 
 
 // Public routes

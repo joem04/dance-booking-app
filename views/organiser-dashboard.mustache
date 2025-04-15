@@ -1,3 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/courses">Courses</a>
+    {{#user}}
+      {{#isOrganiser}}<a href="/organiser/dashboard">Organiser Panel</a>{{/isOrganiser}}
+      <span>Welcome, {{user.username}}</span>
+      <a href="/logout">Logout</a>
+    {{/user}}
+    {{^user}}
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    {{/user}}
+  </nav>
+
+  <main>
 <h1>Organiser Dashboard</h1>
 
 <p><a href="/organiser/courses/new">➕ Add New Course</a></p>
@@ -26,3 +49,7 @@
 {{/courses.length}}
 
 <p><a href="/courses">← Back to Public Courses</a></p>
+
+  </main>
+</body>
+</html>
