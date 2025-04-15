@@ -11,11 +11,13 @@
   <nav>
     <a href="/">Home</a>
     <a href="/courses">Courses</a>
+
     {{#user}}
       {{#isOrganiser}}<a href="/organiser/dashboard">Organiser Panel</a>{{/isOrganiser}}
       <span class="welcome">Welcome, {{user.username}}</span>
       <a href="/logout">Logout</a>
     {{/user}}
+
     {{^user}}
       <a href="/login">Login</a>
       <a href="/register">Register</a>

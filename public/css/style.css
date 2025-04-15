@@ -1,7 +1,7 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background: #f6f8fa;
+  background: #6a7077;
   color: #333;
 }
 
@@ -15,6 +15,7 @@ nav {
   align-items: center;
   gap: 20px;
   flex-wrap: wrap;
+  padding-left: 10px;
 }
 
 nav a {
@@ -22,7 +23,6 @@ nav a {
   text-decoration: none;
   font-weight: 500;
   font-size: 16px;
-  opacity: 1;
   transition: opacity 0.2s ease;
 }
 
@@ -35,7 +35,6 @@ nav .welcome {
   font-size: 16px;
   margin-left: auto;
 }
-
 
 main {
   padding: 30px;
