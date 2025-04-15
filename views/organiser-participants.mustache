@@ -1,0 +1,15 @@
+<h1>Participants for {{course.name}}</h1>
+
+{{#course.bookings.length}}
+  <ul>
+    {{#course.bookings}}
+      <li>{{.}}</li>
+    {{/course.bookings}}
+  </ul>
+{{/course.bookings.length}}
+
+{{^course.bookings.length}}
+  <p>No one enrolled yet.</p>
+{{/course.bookings.length}}
+
+<a href="/organiser/dashboard">← Back to Dashboard</a>
